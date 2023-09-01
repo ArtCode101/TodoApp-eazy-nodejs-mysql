@@ -12,3 +12,6 @@ dbup:
 
 dbdw:
 	docker exec -i db-mysql mysql -uroot -proot todo < database/tododown.sql
+
+dbtc:
+	node testdbconnection.js
