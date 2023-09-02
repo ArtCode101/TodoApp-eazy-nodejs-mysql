@@ -95,6 +95,23 @@ app.put("/todo/:id",(req,res)=>{
     }
 })
 
+app.delete("/todo/:id",(req, res)=>{
+    const id = req.param("id")
+
+    const queryString = `delete from todos where id=${id}`
+    try {
+        connection.query(queryString,(err, result)=>{
+            if (err){
+                res.status(500).send(err)
+                throw err
+            }
+            res.status(200).json()
+        })
+    }catch (ex){
+        res.status(500).send(ex)
+    }
+})
+
 app.listen(port,()=> {
     console.log('Running app http://localhost:'+port)
 })

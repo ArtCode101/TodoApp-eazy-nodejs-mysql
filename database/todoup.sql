@@ -2,7 +2,7 @@ CREATE TABLE `todos` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `topic` varchar(255) NOT NULL,
   `message` text DEFAULT null,
-  `status` bool NOT NULL DEFAULT (false),
+  `status` boolean NOT NULL DEFAULT (false),
   `timestamp` timestamp NOT NULL DEFAULT (now())
 );
 
