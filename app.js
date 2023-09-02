@@ -18,6 +18,24 @@ connection.connect(function(err) {
 const app = express()
 app.use(express.json())
 
+app.get("/test",(req, res)=>{
+    try{
+        connection.query("show tables;",(err, result)=>{
+            if (err != null){
+                res.status(500).send(err)
+                throw err
+            }
+            
+            console.log(result);        
+            res.status(200).json(result)
+        })
+    }catch (ex){
+        res.status(500).send(ex)
+    }
+})
+
+
+
 
 app.listen(port,()=> {
     console.log('Running app http://localhost:'+port)
