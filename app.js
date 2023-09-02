@@ -78,6 +78,24 @@ app.get("/todo/get",(req,res)=>{
     }
 })
 
+app.put("/todo/:id",(req,res)=>{
+    const id = req.param("id")
+    const status =  Boolean(req.body.status)
+    const queryString = `update todos set status=${status} where id=${id}`
+    try {
+        connection.query(queryString,(err, result)=>{
+            if (err){
+                res.status(500).send(err)
+                throw err
+            }
+
+            res.status(200).json()
+        })
+    }catch (ex){
+        res.status(500).send(ex)
+    }
+})
+
 app.listen(port,()=> {
     console.log('Running app http://localhost:'+port)
 })
