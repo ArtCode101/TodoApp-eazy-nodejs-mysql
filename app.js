@@ -18,23 +18,24 @@ connection.connect(function(err) {
 const app = express()
 app.use(express.json())
 
-app.get("/test",(req, res)=>{
-    try{
-        connection.query("show tables;",(err, result)=>{
-            if (err != null){
+app.post("/todo/create",(req, res)=>{
+    const topic = req.body.topic
+    const message = req.body.message
+
+    const queryString = `insert into todos(topic, message) values('${topic}', '${message}')`
+
+    try {
+        connection.query(queryString,(err, result)=>{
+            if (err){
                 res.status(500).send(err)
                 throw err
             }
-            
-            console.log(result);        
-            res.status(200).json(result)
+            res.status(201).send()
         })
     }catch (ex){
         res.status(500).send(ex)
     }
 })
-
-
 
 
 app.listen(port,()=> {
