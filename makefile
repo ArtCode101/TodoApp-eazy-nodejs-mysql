@@ -15,3 +15,6 @@ dbdw:
 
 dbtc:
 	node testdbconnection.js
+
+rapp:
+	dbhostname=localhost dbport=3308 dbuser=root dbpassword=root dbname=todo port=3000 node app.js
