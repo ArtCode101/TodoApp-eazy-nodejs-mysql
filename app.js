@@ -58,6 +58,26 @@ app.get("/todo/get/:id",(req,res)=>{
     }
 })
 
+app.get("/todo/get",(req,res)=>{
+    const queryString = `select * from todos`
+    try {
+        connection.query(queryString,(err, result)=>{
+            if (err){
+                res.status(500).send(err)
+                throw err
+            }
+
+            if (result.length <= 0){
+                res.status(404).json("data not found!")
+            }else{
+                res.status(200).json(result)
+            }
+        })
+    }catch (ex){
+        res.status(500).send(ex)
+    }
+})
+
 app.listen(port,()=> {
     console.log('Running app http://localhost:'+port)
 })
